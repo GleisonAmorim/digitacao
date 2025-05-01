@@ -5,11 +5,28 @@
     <meta charset="UTF-8">
     <title>Treinamento de Digitação - Avançado</title>
     <style>
+        /* [Estilos] - Mesmos que você já forneceu */
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
             background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 1000px;
+            background-color: #fff;
             padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         h1 {
@@ -22,80 +39,6 @@
             margin: 20px 0;
             font-weight: bold;
             color: #333;
-        }
-
-        #keyboard {
-            display: inline-block;
-            margin: 20px auto;
-        }
-
-        .row {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 5px;
-        }
-
-        .key {
-            width: 35px;
-            height: 35px;
-            margin: 2px;
-            border-radius: 8px;
-            text-align: center;
-            line-height: 35px;
-            border: 1px solid #ccc;
-            background: #fff;
-            font-weight: bold;
-            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-            cursor: default;
-            transition: background 0.2s ease, transform 0.1s ease;
-        }
-
-        .key:hover {
-            background: #f1f1f1;
-            transform: scale(1.05);
-        }
-
-        .highlight {
-            border: 3px solid #ffc107 !important;
-            padding: 2px;
-            box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
-        }
-
-        /* Cores para os dedos */
-        .finger-1 {
-            background-color: #66ff66;
-        }
-
-        .finger-2 {
-            background-color: #eca20d;
-        }
-
-        .finger-3 {
-            background-color: #ebff39;
-        }
-
-        .finger-4 {
-            background-color: #5a77f7;
-        }
-
-        .finger-5 {
-            background-color: #5a77f7;
-        }
-
-        .finger-6 {
-            background-color: #ff55e8;
-        }
-
-        .finger-7 {
-            background-color: #ff0e22;
-        }
-
-        .finger-8 {
-            background-color: #7aff2d;
-        }
-
-        .finger-9 {
-            background-color: #66e8ff;
         }
 
         #userInput {
@@ -144,6 +87,25 @@
             cursor: not-allowed;
         }
 
+        #performance {
+            background-color: #eef1f8;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 200px;
+            font-size: 14px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        #performance span {
+            color: #5a77f7;
+            font-weight: bold;
+        }
+
         #handImage {
             margin-top: 30px;
             display: flex;
@@ -158,138 +120,82 @@
             border-radius: 10px;
         }
 
-        .key.wide {
-            width: 80px;
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: auto;
+            padding-top: 60px;
         }
 
-        .key-space {
-            background-color: #0cf5e9;
-            width: 230px;
-            height: 35px;
-            line-height: 35px;
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 400px;
             text-align: center;
-            font-weight: bold;
+            position: relative;
+        }
+
+        .modal-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #5a77f7;
+            color: #fff;
+            border: none;
             border-radius: 5px;
-            border: 1px solid #ccc;
-            display: inline-block;
+            cursor: pointer;
         }
 
-        .key.tab {
-            width: 55px;
+        .modal-button:hover {
+            background-color: #4a66c0;
         }
 
-        .key.shift,
-        .key.enter,
-        .key.backspace {
-            width: 70px;
-        }
-
-        .key.caps {
-            width: 60px;
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
         }
     </style>
 </head>
 
 <body>
-    <h1>Treinamento de Digitação - Avançado</h1>
-    <div id="instruction">Digite: <span id="targetText">asdf</span></div>
-    <input type="text" id="userInput" placeholder="Digite aqui..." oninput="checkInput()">
-    <div id="feedback"></div>
+    <div class="container">
+        <h1>Treinamento de Digitação - Avançado</h1>
+        <div id="instruction">Digite: <span id="targetText">asdf</span></div>
+        <input type="text" id="userInput" placeholder="Digite aqui..." oninput="checkInput()">
+        <div id="feedback"></div>
+        <button id="nextButton" onclick="nextExercise()" disabled>Próximo exercício</button>
 
-    <div id="keyboard">
-        <!-- Linha 1 -->
-        <div class="row">
-            <div class="key finger-1">¹</div>
-            <div class="key finger-1">1</div>
-            <div class="key finger-2">2</div>
-            <div class="key finger-3">3</div>
-            <div class="key finger-4">4</div>
-            <div class="key finger-4">5</div>
-            <div class="key finger-6">6</div>
-            <div class="key finger-6">7</div>
-            <div class="key finger-7">8</div>
-            <div class="key finger-8">9</div>
-            <div class="key finger-9">0</div>
-            <div class="key finger-9">-</div>
-            <div class="key finger-9">=</div>
-            <div class="key backspace finger-9">←</div>
+        <div id="handImage">
+            <img src="pos.JPG" alt="Posição correta das mãos no teclado">
         </div>
 
-        <!-- Linha 2 -->
-        <div class="row">
-            <div class="key tab finger-1">Tab</div>
-            <div class="key finger-1" id="q">q</div>
-            <div class="key finger-2" id="w">w</div>
-            <div class="key finger-3" id="e">e</div>
-            <div class="key finger-4" id="r">r</div>
-            <div class="key finger-4" id="t">t</div>
-            <div class="key finger-6" id="y">y</div>
-            <div class="key finger-6" id="u">u</div>
-            <div class="key finger-7" id="i">i</div>
-            <div class="key finger-8" id="o">o</div>
-            <div class="key finger-9" id="p">p</div>
-            <div class="key finger-9">´</div>
-            <div class="key finger-9">[</div>
-        </div>
-
-        <!-- Linha 3 -->
-        <div class="row">
-            <div class="key finger-1">Caps</div>
-            <div class="key finger-1" id="a">a</div>
-            <div class="key finger-2" id="s">s</div>
-            <div class="key finger-3" id="d">d</div>
-            <div class="key finger-4" id="f">f</div>
-            <div class="key finger-4" id="g">g</div>
-            <div class="key finger-6" id="h">h</div>
-            <div class="key finger-6" id="j">j</div>
-            <div class="key finger-7" id="k">k</div>
-            <div class="key finger-8" id="l">l</div>
-            <div class="key finger-9">ç</div>
-            <div class="key finger-9">~</div>
-            <div class="key finger-9">Enter</div>
-        </div>
-
-        <!-- Linha 4 -->
-        <div class="row">
-            <div class="key finger-1">Shift</div>
-            <div class="key finger-1" id="z">z</div>
-            <div class="key finger-2" id="x">x</div>
-            <div class="key finger-3" id="c">c</div>
-            <div class="key finger-4" id="v">v</div>
-            <div class="key finger-4" id="b">b</div>
-            <div class="key finger-6" id="n">n</div>
-            <div class="key finger-6" id="m">m</div>
-            <div class="key finger-7">,</div>
-            <div class="key finger-7">.</div>
-            <div class="key finger-8">;</div>
-            <div class="key finger-8">/</div>
-            <div class="key finger-9">Shift</div>
-        </div>
-
-        <!-- Linha 5 -->
-        <div class="row">
-            <div class="key finger-1">Ctrl</div>
-            <div class="key finger-1">Win</div>
-            <div class="key finger-1">Alt</div>
-            <div class="key-space">Espaço</div>
-            <div class="key finger-1">AltGr</div>
-            <div class="key finger-1">Fn</div>
-            <div class="key finger-9">Ctrl</div>
+        <div id="performance">
+            <p>Tempo: <span id="timer">00:00</span></p>
+            <p>Acertos: <span id="correctCount">0</span> | Erros: <span id="errorCount">0</span></p>
+            <p>Velocidade: <span id="wpm">0</span> </p>
         </div>
     </div>
 
-    </div>
-
-    <button id="nextButton" onclick="nextExercise()" disabled>Próximo exercício</button>
-
-    <div id="handImage">
-        <img src="pos.jpg" alt="Posição correta das mãos no teclado">
-    </div>
-
-    <div id="performance">
-        <p>Tempo: <span id="timer">00:00</span></p>
-        <p>Acertos: <span id="correctCount">0</span> | Erros: <span id="errorCount">0</span></p>
-        <p>Velocidade: <span id="wpm">0</span> WPM</p>
+    <div id="performanceModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h2>Desempenho Final</h2>
+            <p>Acertos: <span id="modalCorrectCount">0</span></p>
+            <p>Erros: <span id="modalErrorCount">0</span></p>
+            <p>Velocidade: <span id="modalWpm">0</span> palavras por minuto</p>
+            <button class="modal-button" onclick="closeModal()">Fechar</button>
+        </div>
     </div>
 
     <script>
@@ -303,24 +209,14 @@
         let startTime, timerInterval;
         let correctCount = 0, errorCount = 0;
 
-        function highlightKey(char) {
-            clearHighlights();
-            const key = document.getElementById(char.toLowerCase());
-            if (key) {
-                key.classList.add("highlight");
-            }
-        }
-
-        function clearHighlights() {
-            document.querySelectorAll(".key").forEach(k => k.classList.remove("highlight"));
-        }
-
         function checkInput() {
             const input = document.getElementById("userInput").value;
             const target = exercises[current];
             const feedback = document.getElementById("feedback");
             const nextBtn = document.getElementById("nextButton");
-
+            if (!startTime) {
+                startTimer();
+            }
             if (input === target) {
                 feedback.innerText = "Correto! 👏";
                 feedback.classList.add("correct");
@@ -333,8 +229,6 @@
                 feedback.innerText = "";
                 feedback.classList.remove("correct");
                 nextBtn.disabled = true;
-                const nextChar = target[input.length] || "";
-                highlightKey(nextChar);
                 if (input.length > target.length) {
                     errorCount++;
                     updatePerformance();
@@ -344,15 +238,18 @@
         }
 
         function nextExercise() {
-            current = (current + 1) % exercises.length;
+            current++;
+            if (current >= exercises.length) {
+                clearInterval(timerInterval);
+                showModal();
+                return;
+            }
+
             document.getElementById("targetText").innerText = exercises[current];
             document.getElementById("userInput").value = "";
             document.getElementById("userInput").focus();
-            highlightKey(exercises[current][0]);
             document.getElementById("feedback").innerText = "";
             document.getElementById("nextButton").disabled = true;
-            resetTimer();
-            startTimer();
         }
 
         function startTimer() {
@@ -371,16 +268,10 @@
             return number < 10 ? '0' + number : number;
         }
 
-        //   function resetTimer() {
-        //     clearInterval(timerInterval);
-        //   document.getElementById("timer").innerText = "00:00";
-        //}
-        window.onload = () => {
-            highlightKey(exercises[0][0]);
-            startTimer();
-        };
         function updatePerformance() {
-            const wpm = Math.round((correctCount / 5) / (parseInt(document.getElementById("timer").innerText.split(":")[0]) + parseInt(document.getElementById("timer").innerText.split(":")[1]) / 60));
+            const timer = document.getElementById("timer").innerText.split(":");
+            const minutes = parseInt(timer[0]) + parseInt(timer[1]) / 60;
+            const wpm = minutes > 0 ? Math.round(correctCount / minutes) : 0;
             document.getElementById("correctCount").innerText = correctCount;
             document.getElementById("errorCount").innerText = errorCount;
             document.getElementById("wpm").innerText = wpm;
@@ -410,6 +301,28 @@
                 }
             }
         });
+
+        function showModal() {
+            const timerText = document.getElementById("timer").innerText;
+            const timerParts = timerText.split(":");
+            const minutes = parseInt(timerParts[0]) + parseInt(timerParts[1]) / 60;
+            const wpm = minutes > 0 ? Math.round(correctCount / minutes) : 0;
+
+            document.getElementById("modalCorrectCount").innerText = correctCount;
+            document.getElementById("modalErrorCount").innerText = errorCount;
+            document.getElementById("modalWpm").innerText = wpm;
+
+            document.getElementById("performanceModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("performanceModal").style.display = "none";
+        }
+
+        window.onload = () => {
+            document.getElementById("targetText").innerText = exercises[current];
+            startTimer();
+        };
     </script>
 </body>
 
