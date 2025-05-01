@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Treinamento de Digitação - Avançado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #instruction {
+            font-size: 22px;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #333;
+        }
+
+        #keyboard {
+            display: inline-block;
+            margin: 20px auto;
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 5px;
+        }
+
+        .key {
+            width: 35px;
+            height: 35px;
+            margin: 2px;
+            border-radius: 8px;
+            text-align: center;
+            line-height: 35px;
+            border: 1px solid #ccc;
+            background: #fff;
+            font-weight: bold;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+            cursor: default;
+            transition: background 0.2s ease, transform 0.1s ease;
+        }
+
+        .key:hover {
+            background: #f1f1f1;
+            transform: scale(1.05);
+        }
+
+        .highlight {
+            border: 3px solid #ffc107 !important;
+            padding: 2px;
+            box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+        }
+
+        /* Cores para os dedos */
+        .finger-1 {
+            background-color: #66ff66;
+        }
+
+        .finger-2 {
+            background-color: #eca20d;
+        }
+
+        .finger-3 {
+            background-color: #ebff39;
+        }
+
+        .finger-4 {
+            background-color: #5a77f7;
+        }
+
+        .finger-5 {
+            background-color: #5a77f7;
+        }
+
+        .finger-6 {
+            background-color: #ff55e8;
+        }
+
+        .finger-7 {
+            background-color: #ff0e22;
+        }
+
+        .finger-8 {
+            background-color: #7aff2d;
+        }
+
+        .finger-9 {
+            background-color: #66e8ff;
+        }
+
+        #userInput {
+            margin-top: 20px;
+            padding: 10px;
+            width: 300px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        #userInput:focus {
+            border-color: #5a77f7;
+        }
+
+        #feedback {
+            margin-top: 15px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        #feedback.correct {
+            color: green;
+        }
+
+        #feedback.incorrect {
+            color: red;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            background-color: #5a77f7;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        #handImage {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #handImage img {
+            max-width: 100%;
+            height: auto;
+            max-height: 300px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .key.wide {
+            width: 80px;
+        }
+
+        .key-space {
+            background-color: #0cf5e9;
+            width: 230px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            display: inline-block;
+        }
+
+        .key.tab {
+            width: 55px;
+        }
+
+        .key.shift,
+        .key.enter,
+        .key.backspace {
+            width: 70px;
+        }
+
+        .key.caps {
+            width: 60px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Treinamento de Digitação - Avançado</h1>
+    <div id="instruction">Digite: <span id="targetText">asdf</span></div>
+    <input type="text" id="userInput" placeholder="Digite aqui..." oninput="checkInput()">
+    <div id="feedback"></div>
+
+    <div id="keyboard">
+        <!-- Linha 1 -->
+        <div class="row">
+            <div class="key finger-1">¹</div>
+            <div class="key finger-1">1</div>
+            <div class="key finger-2">2</div>
+            <div class="key finger-3">3</div>
+            <div class="key finger-4">4</div>
+            <div class="key finger-4">5</div>
+            <div class="key finger-6">6</div>
+            <div class="key finger-6">7</div>
+            <div class="key finger-7">8</div>
+            <div class="key finger-8">9</div>
+            <div class="key finger-9">0</div>
+            <div class="key finger-9">-</div>
+            <div class="key finger-9">=</div>
+            <div class="key backspace finger-9">←</div>
+        </div>
+
+        <!-- Linha 2 -->
+        <div class="row">
+            <div class="key tab finger-1">Tab</div>
+            <div class="key finger-1" id="q">q</div>
+            <div class="key finger-2" id="w">w</div>
+            <div class="key finger-3" id="e">e</div>
+            <div class="key finger-4" id="r">r</div>
+            <div class="key finger-4" id="t">t</div>
+            <div class="key finger-6" id="y">y</div>
+            <div class="key finger-6" id="u">u</div>
+            <div class="key finger-7" id="i">i</div>
+            <div class="key finger-8" id="o">o</div>
+            <div class="key finger-9" id="p">p</div>
+            <div class="key finger-9">´</div>
+            <div class="key finger-9">[</div>
+        </div>
+
+        <!-- Linha 3 -->
+        <div class="row">
+            <div class="key finger-1">Caps</div>
+            <div class="key finger-1" id="a">a</div>
+            <div class="key finger-2" id="s">s</div>
+            <div class="key finger-3" id="d">d</div>
+            <div class="key finger-4" id="f">f</div>
+            <div class="key finger-4" id="g">g</div>
+            <div class="key finger-6" id="h">h</div>
+            <div class="key finger-6" id="j">j</div>
+            <div class="key finger-7" id="k">k</div>
+            <div class="key finger-8" id="l">l</div>
+            <div class="key finger-9">ç</div>
+            <div class="key finger-9">~</div>
+            <div class="key finger-9">Enter</div>
+        </div>
+
+        <!-- Linha 4 -->
+        <div class="row">
+            <div class="key finger-1">Shift</div>
+            <div class="key finger-1" id="z">z</div>
+            <div class="key finger-2" id="x">x</div>
+            <div class="key finger-3" id="c">c</div>
+            <div class="key finger-4" id="v">v</div>
+            <div class="key finger-4" id="b">b</div>
+            <div class="key finger-6" id="n">n</div>
+            <div class="key finger-6" id="m">m</div>
+            <div class="key finger-7">,</div>
+            <div class="key finger-7">.</div>
+            <div class="key finger-8">;</div>
+            <div class="key finger-8">/</div>
+            <div class="key finger-9">Shift</div>
+        </div>
+
+        <!-- Linha 5 -->
+        <div class="row">
+            <div class="key finger-1">Ctrl</div>
+            <div class="key finger-1">Win</div>
+            <div class="key finger-1">Alt</div>
+            <div class="key-space">Espaço</div>
+            <div class="key finger-1">AltGr</div>
+            <div class="key finger-1">Fn</div>
+            <div class="key finger-9">Ctrl</div>
+        </div>
+    </div>
+
+    </div>
+
+    <button id="nextButton" onclick="nextExercise()" disabled>Próximo exercício</button>
+
+    <div id="handImage">
+        <img src="pos.JPG" alt="Posição correta das mãos no teclado">
+    </div>
+
+    <div id="performance">
+        <p>Tempo: <span id="timer">00:00</span></p>
+        <p>Acertos: <span id="correctCount">0</span> | Erros: <span id="errorCount">0</span></p>
+        <p>Velocidade: <span id="wpm">0</span> WPM</p>
+    </div>
+
+    <script>
+        const exercises = [
+            "asdf", "jklç", "qwert", "uiop", "zxcv", "bnm", "gato", "casa", "rápido", "teclado",
+            "12345", "67890", "qwerty", "asdfgh", "zxcvbn", "abc123", "xyz789", "oi123", "olá", "perfeito",
+            "linguagem", "testando", "curiosidade", "programação", "exemplo", "sistema", "funcional", "domínio", "tecnologia", "redação"
+        ];
+
+        let current = 0;
+        let startTime, timerInterval;
+        let correctCount = 0, errorCount = 0;
+
+        function highlightKey(char) {
+            clearHighlights();
+            const key = document.getElementById(char.toLowerCase());
+            if (key) {
+                key.classList.add("highlight");
+            }
+        }
+
+        function clearHighlights() {
+            document.querySelectorAll(".key").forEach(k => k.classList.remove("highlight"));
+        }
+
+        function checkInput() {
+            const input = document.getElementById("userInput").value;
+            const target = exercises[current];
+            const feedback = document.getElementById("feedback");
+            const nextBtn = document.getElementById("nextButton");
+
+            if (input === target) {
+                feedback.innerText = "Correto! 👏";
+                feedback.classList.add("correct");
+                feedback.classList.remove("incorrect");
+                nextBtn.disabled = false;
+                correctCount++;
+                updatePerformance();
+                playSound('correct');
+            } else {
+                feedback.innerText = "";
+                feedback.classList.remove("correct");
+                nextBtn.disabled = true;
+                const nextChar = target[input.length] || "";
+                highlightKey(nextChar);
+                if (input.length > target.length) {
+                    errorCount++;
+                    updatePerformance();
+                    playSound('error');
+                }
+            }
+        }
+
+        function nextExercise() {
+            current = (current + 1) % exercises.length;
+            document.getElementById("targetText").innerText = exercises[current];
+            document.getElementById("userInput").value = "";
+            document.getElementById("userInput").focus();
+            highlightKey(exercises[current][0]);
+            document.getElementById("feedback").innerText = "";
+            document.getElementById("nextButton").disabled = true;
+            resetTimer();
+            startTimer();
+        }
+
+        function startTimer() {
+            startTime = Date.now();
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        function updateTimer() {
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const minutes = Math.floor(elapsed / 60);
+            const seconds = elapsed % 60;
+            document.getElementById("timer").innerText = `${pad(minutes)}:${pad(seconds)}`;
+        }
+
+        function pad(number) {
+            return number < 10 ? '0' + number : number;
+        }
+
+        //   function resetTimer() {
+        //     clearInterval(timerInterval);
+        //   document.getElementById("timer").innerText = "00:00";
+        //}
+        window.onload = () => {
+            highlightKey(exercises[0][0]);
+            startTimer();
+        };
+        function updatePerformance() {
+            const wpm = Math.round((correctCount / 5) / (parseInt(document.getElementById("timer").innerText.split(":")[0]) + parseInt(document.getElementById("timer").innerText.split(":")[1]) / 60));
+            document.getElementById("correctCount").innerText = correctCount;
+            document.getElementById("errorCount").innerText = errorCount;
+            document.getElementById("wpm").innerText = wpm;
+        }
+
+        function playSound(type) {
+            const audio = new Audio(type === 'correct' ? 'correct.mp3' : 'error.mp3');
+            audio.play();
+        }
+
+        document.getElementById("userInput").addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                const input = document.getElementById("userInput").value;
+                const target = exercises[current];
+
+                if (input === target) {
+                    nextExercise();
+                } else {
+                    const feedback = document.getElementById("feedback");
+                    feedback.innerText = "Incorreto. Tente novamente.";
+                    feedback.classList.remove("correct");
+                    feedback.classList.add("incorrect");
+                    errorCount++;
+                    updatePerformance();
+                    playSound('error');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

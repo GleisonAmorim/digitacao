@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Página Inicial - Treinamento de Digitação</title>
+    <style>
+        /* Estilos para o corpo da página */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container centralizado */
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 40px;
+            width: 80%;
+            max-width: 600px;
+            transition: all 0.3s ease;
+        }
+
+        .container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            color: #333;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        /* Estilo dos botões */
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #4285f4;
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #357ae8;
+            transform: translateY(-5px);
+        }
+
+        .button:active {
+            transform: translateY(0);
+        }
+
+        /* Adicionando o estilo de logo ou imagem */
+        #logo {
+            max-width: 120px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <img id="logo" src="pos.jpg" alt="Logo do Treinamento" />
+        <h1>Bem-vindo ao Treinamento de Digitação!</h1>
+        <p>Escolha uma das opções abaixo para começar o seu treinamento:</p>
+
+        <!-- Botões de navegação -->
+        <a href="digitação.html" class="button">Iniciar Treinamento de Digitação</a>
+        <a href="texto.html" class="button">Treinamento de Texto</a>
+    </div>
+
+</body>
+
+</html>

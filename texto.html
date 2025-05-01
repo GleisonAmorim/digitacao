@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Treinamento de Digitação com Frases</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f0f0f0;
+            padding: 30px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #targetPhrase {
+            font-size: 24px;
+            margin: 20px 0;
+            color: #444;
+            font-weight: bold;
+        }
+
+        #userInput {
+            font-size: 20px;
+            width: 60%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #aaa;
+            outline: none;
+        }
+
+        #userInput.correct {
+            border-color: green;
+        }
+
+        #userInput.incorrect {
+            border-color: red;
+        }
+
+        #feedback {
+            margin-top: 15px;
+            font-size: 18px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: gray;
+        }
+
+        /* Estilo para a imagem */
+        #imageContainer {
+            margin-top: 20px;
+        }
+
+        #imageContainer img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Treinamento de Digitação - Frases</h1>
+
+    <div id="targetPhrase">O céu está azul nesta manhã.</div>
+
+    <input type="text" id="userInput" placeholder="Digite aqui..." oninput="checkTyping()" autocomplete="off">
+    <div id="feedback"></div>
+
+    <button onclick="nextPhrase()" id="nextButton" disabled>Próxima frase</button>
+
+    <!-- Adicionar imagem centralizada -->
+    <div id="imageContainer">
+        <img src="pos.jpg" alt="Imagem exemplo">
+    </div>
+
+    <script>
+        const phrases = [
+            "O céu está azul nesta manhã.",
+            "Ela gosta de ler livros de aventura.",
+            "Hoje é um bom dia para começar algo novo.",
+            "O gato dorme tranquilamente no sofá.",
+            "A prática leva à perfeição.",
+            "Ele gosta de correr ao amanhecer.",
+            "O almoço estava delicioso hoje.",
+            "A música preenche a sala com energia.",
+            "A leitura pode expandir nossos horizontes.",
+            "Eles decidiram viajar para a praia neste fim de semana."
+        ];
+
+        let currentIndex = 0;
+        const targetPhrase = document.getElementById("targetPhrase");
+        const userInput = document.getElementById("userInput");
+        const feedback = document.getElementById("feedback");
+        const nextButton = document.getElementById("nextButton");
+
+        function checkTyping() {
+            const typed = userInput.value;
+            const target = phrases[currentIndex];
+
+            if (target.startsWith(typed)) {
+                userInput.classList.remove("incorrect");
+                userInput.classList.add("correct");
+                feedback.textContent = "";
+
+                if (typed === target) {
+                    feedback.textContent = "Frase correta!";
+                    feedback.style.color = "green";
+                    nextButton.disabled = false;
+                    userInput.disabled = true;
+                }
+            } else {
+                userInput.classList.remove("correct");
+                userInput.classList.add("incorrect");
+                feedback.textContent = "Frase incorreta!";
+                feedback.style.color = "red";
+                nextButton.disabled = true;
+            }
+        }
+
+        function nextPhrase() {
+            currentIndex++;
+            if (currentIndex >= phrases.length) {
+                feedback.textContent = "Parabéns! Você concluiu todas as frases.";
+                targetPhrase.textContent = "";
+                userInput.style.display = "none";
+                nextButton.style.display = "none";
+                return;
+            }
+
+            targetPhrase.textContent = phrases[currentIndex];
+            userInput.value = "";
+            userInput.disabled = false;
+            userInput.focus();
+            nextButton.disabled = true;
+            userInput.classList.remove("correct", "incorrect");
+            feedback.textContent = "";
+        }
+    </script>
+</body>
+
+</html>
