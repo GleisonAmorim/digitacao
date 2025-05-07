@@ -5,20 +5,20 @@
     <meta charset="UTF-8">
     <title>Página Inicial - Treinamento de Digitação</title>
     <style>
-        /* Estilos para o corpo da página */
+        /* Corpo com layout em coluna e altura total */
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        /* Container centralizado */
+        /* Container ocupa espaço disponível */
         .container {
+            flex: 1;
             text-align: center;
             background-color: #ffffff;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -26,6 +26,7 @@
             padding: 40px;
             width: 80%;
             max-width: 600px;
+            margin: 40px auto;
             transition: all 0.3s ease;
         }
 
@@ -46,7 +47,6 @@
             margin-bottom: 30px;
         }
 
-        /* Estilo dos botões */
         .button {
             display: inline-block;
             padding: 15px 30px;
@@ -68,10 +68,29 @@
             transform: translateY(0);
         }
 
-        /* Adicionando o estilo de logo ou imagem */
         #logo {
             max-width: 120px;
             margin-bottom: 20px;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding: 20px 0;
+            width: 100%;
+            border-top: 1px solid #333;
+            text-align: center;
+            color: #aaa;
+            background-color: #1A1A1A;
+        }
+
+        footer a {
+            color: #64B5F6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -83,40 +102,18 @@
         <h1>Bem-vindo ao Treinamento de Digitação!</h1>
         <p>Escolha uma das opções abaixo para começar o seu treinamento:</p>
 
-        <!-- Botões de navegação -->
         <a href="digitação.html" class="button">Iniciar Treinamento de Digitação</a>
         <a href="texto.html" class="button">Treinamento de Texto</a>
     </div>
-<style>
 
-footer {
-margin-top: 60px;
-padding: 20px 0;
-width: 100%;
-border-top: 1px solid #333;
-text-align: center;
-color: #aaa;
-background-color: #1A1A1A;
-}
+    <footer>
+        <p>👨‍💻 Conheça o desenvolvedor:
+            <a href="https://www.linkedin.com/in/gleisonamorim/" target="_blank">
+                Gleison Amorim
+            </a>
+        </p>
+    </footer>
 
-footer a {
-color: #64B5F6;
-text-decoration: none;
-font-weight: bold;
-}
-
-footer a:hover {
-text-decoration: underline;
-}
-</style>
-<footer style="margin-top: 40px; text-align: center; color: #888;">
-    <p>👨‍💻 Conheça o desenvolvedor:
-        <a href="https://www.linkedin.com/in/gleisonamorim/" target="_blank"
-            style="color: #64B5F6; text-decoration: none;">
-            Gleison Amorim
-        </a>
-    </p>
-</footer>
 </body>
 
 </html>
