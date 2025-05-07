@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Página Inicial - Treinamento de Digitação</title>
     <style>
-        /* Corpo com layout em coluna e altura total */
+        /* Corpo com layout em coluna */
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
@@ -16,7 +16,7 @@
             min-height: 100vh;
         }
 
-        /* Container ocupa espaço disponível */
+        /* Container ocupa o espaço disponível */
         .container {
             flex: 1;
             text-align: center;
@@ -73,10 +73,13 @@
             margin-bottom: 20px;
         }
 
+        /* Estilo do footer fixo na parte inferior */
         footer {
-            margin-top: 40px;
-            padding: 20px 0;
+            position: fixed;
+            left: 0;
+            bottom: 0;
             width: 100%;
+            padding: 20px 0;
             border-top: 1px solid #333;
             text-align: center;
             color: #aaa;
